@@ -5,6 +5,7 @@ import 'dob.dart';
 import 'registered.dart';
 import 'id.dart';
 import 'picture.dart';
+import 'package:quiver/core.dart';
 
 class User {
   String gender;
@@ -86,4 +87,7 @@ class User {
     data['nat'] = this.nat;
     return data;
   }
+
+  bool operator ==(o) => o is User && email == o.email;
+  int get hashCode => email.hashCode;
 }

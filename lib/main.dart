@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'services/providers/user/user_bloc_provider.dart';
+import 'services/blocs/user/user_bloc_provider.dart';
 import 'services/blocs/user/user_bloc.dart';
 import 'pages/user_list_page.dart';
 import 'pages/user_detail_page.dart';
@@ -19,8 +19,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+          brightness: Brightness.light,
+          primaryColor: Colors.deepPurple,
+          primaryColorDark: Colors.black,
+          accentColor: Colors.redAccent,
+          textTheme: TextTheme(
+              body1: TextStyle(color: Colors.pink, fontWeight: FontWeight.w600))
+          ),
       // home: UserBlocProvider(
       //   bloc: bloc,
       //   child: UserListsPage(),

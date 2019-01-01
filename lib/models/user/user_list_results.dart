@@ -6,7 +6,9 @@ class UserListResult {
   Info info;
 
   UserListResult({this.users, this.info});
-
+  UserListResult.empty() {
+    this.users = [];
+  }
   UserListResult.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
       users = new List<User>();

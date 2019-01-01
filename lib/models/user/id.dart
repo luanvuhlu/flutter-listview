@@ -1,3 +1,5 @@
+import 'package:quiver/core.dart';
+
 class Id {
   String name;
   String value;
@@ -13,5 +15,13 @@ class Id {
     data['name'] = this.name;
     data['value'] = this.value;
     return data;
+  }
+
+  bool operator ==(o) => o is Id && name == o.name && value == o.value;
+  int get hashCode => hash2(name.hashCode, value.hashCode);
+
+  @override
+  String toString() {
+    return '$name - $value';
   }
 }

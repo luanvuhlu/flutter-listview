@@ -60,7 +60,7 @@ class UserDetailPage extends StatelessWidget {
               SizedBox(
                 height: 20,
               ),
-              _buildAddressMap(context),
+              // _buildAddressMap(context),
             ],
           ),
         ),

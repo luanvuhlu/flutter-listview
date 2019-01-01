@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import '../services/blocs/user/user_bloc.dart';
-import '../services/providers/user/user_bloc_provider.dart';
+import '../services/blocs/user/user_bloc_provider.dart';
 import '../widgets/user_list.dart';
 import '../pages/camera_page.dart';
+import '../services/blocs/user/users_state.dart';
 
 class UserListsPage extends StatefulWidget {
   @override
@@ -23,9 +24,9 @@ class _UserListsPageState extends State<UserListsPage> {
 
   @override
   Widget build(BuildContext context) {
-    UserBloc bloc = UserBlocProvider.of(context).bloc;
+    UserBloc bloc = UserBlocProvider.of(context);
     if (_firstTimeLoad) {
-      bloc.fetchUser(page: 1);
+      bloc.fetch(page: 1);
       _firstTimeLoad = false;
     }
     return Scaffold(
@@ -34,7 +35,19 @@ class _UserListsPageState extends State<UserListsPage> {
         actions: <Widget>[
           Center(
             child: StreamBuilder(
-
+              stream: bloc.itemCount,
+              initialData: 0,
+              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                return Text('${snapshot.data} girls');
+              },
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 30),
+          ),
+          Center(
+            child: StreamBuilder(
+              stream: bloc.favoritesCount,
               initialData: 0,
               builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
                 return Text('${snapshot.data} favorites');
@@ -96,11 +109,20 @@ class _UserListsPageState extends State<UserListsPage> {
     }
     return Stack(
       children: <Widget>[
-        UserList(
-            scrollController: _scrollController,
-            users: snapshot.data.results.users,
-            refreshCallback: _handleRefresh,
-            loadMoreCallback: _handleLoadMore),
+        NotificationListener<ScrollNotification>(
+          onNotification: (ScrollNotification notification) {
+            if (_scrollController.position.pixels >=
+                _scrollController.position.maxScrollExtent -
+                    MediaQuery.of(context).size.height) {
+              _handleLoadMore();
+            }
+          },
+          child: UserList(
+              scrollController: _scrollController,
+              users: snapshot.data.results.users,
+              refreshCallback: _handleRefresh,
+              loadMoreCallback: _handleLoadMore),
+        ),
         _loader(snapshot)
       ],
     );
@@ -125,14 +147,14 @@ class _UserListsPageState extends State<UserListsPage> {
   }
 
   Future<Null> _handleRefresh() async {
-    UserBloc bloc = UserBlocProvider.of(context).bloc;
-    bloc.fetchUser();
+    UserBloc bloc = UserBlocProvider.of(context);
+    bloc.fetch();
     await bloc.userStream.first;
     return null;
   }
 
   Future<Null> _handleLoadMore() async {
-    UserBloc bloc = UserBlocProvider.of(context).bloc;
+    UserBloc bloc = UserBlocProvider.of(context);
     bloc.loadMore();
     await bloc.userStream.first;
     return null;
