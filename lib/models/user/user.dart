@@ -19,7 +19,7 @@ class User {
   Id id;
   Picture picture;
   String nat;
-
+  bool favorite;
   User(
       {this.gender,
       this.name,
@@ -32,9 +32,11 @@ class User {
       this.cell,
       this.id,
       this.picture,
-      this.nat});
+      this.nat,
+      this.favorite = false});
 
   User.fromJson(Map<String, dynamic> json) {
+    favorite = false;
     gender = json['gender'];
     name = json['name'] != null ? new Name.fromJson(json['name']) : null;
     location = json['location'] != null

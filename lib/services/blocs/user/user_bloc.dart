@@ -6,7 +6,7 @@ import '../../../models/user/user_list_results.dart';
 class UserBloc {
   final UserApiClient _apiClient = new UserApiClient();
   UserBlocState _currentState;
-
+  
   StreamSubscription<UserListResult> _fetchUsersSub;
 
   final StreamController<UserBlocState> _userController =

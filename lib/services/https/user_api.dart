@@ -8,7 +8,7 @@ class UserApiClient {
   final HttpClient _httpClient = HttpClient();
 
   Future<UserListResult> getList(int start, int size) async {
-    final url = 'https://randomuser.me/api/?page=$start&results=$size';
+    final url = 'https://randomuser.me/api/?gender=female&page=$start&results=$size';
     final request = await _httpClient.getUrl(Uri.parse(url));
     final response = await request.close();
     if (response.statusCode == HttpStatus.ok) {
