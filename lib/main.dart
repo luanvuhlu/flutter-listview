@@ -23,8 +23,10 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.deepPurple,
           primaryColorDark: Colors.black,
           accentColor: Colors.redAccent,
+          buttonColor: Colors.deepPurple,
           textTheme: TextTheme(
-              body1: TextStyle(color: Colors.pink, fontWeight: FontWeight.w600))
+            title: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+            body1: TextStyle(color: Colors.pink, fontWeight: FontWeight.w600))
           ),
       // home: UserBlocProvider(
       //   bloc: bloc,
