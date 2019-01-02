@@ -12,3 +12,5 @@ A new Flutter project use: ListView, BLoC, Camera, FireBase, rxdart, Google Map,
 - [ ] Enable/Disable add comment button
 - [ ] Upload avatar
 - [ ] Fix some issues about constraint layouts
+- [ ] Add more animation
+- [ ] Cache
