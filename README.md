@@ -17,8 +17,8 @@ samples, guidance on mobile development, and a full API reference.
 
 ### Screenshot
 ![](screenshots/demo.gif)
-![](screenshots/camera.gif)
-![](screenshots/user_detail.gif)
+![](screenshots/camera.png)
+![](screenshots/user_detail.png)
 ### TODO
 - [ ] close stream controllers
 - [ ] fix layout comment list
